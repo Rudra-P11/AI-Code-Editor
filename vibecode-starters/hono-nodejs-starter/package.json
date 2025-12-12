@@ -1,0 +1,17 @@
+{
+  "name": "hono-starter",
+  "version": "1.0.0",
+  "description": "Hono Starter",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "hono dev",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "hono": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "react-ts-starter",
+  "version": "1.0.0",
+  "description": "React TypeScript Starter",
+  "main": "index.tsx",
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0"
+  }
+}
