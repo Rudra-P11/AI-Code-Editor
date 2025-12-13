@@ -164,125 +164,137 @@ export default function ProjectTable({
 
   return (
     <>
-      <div className="border rounded-lg overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Project</TableHead>
-              <TableHead>Template</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead>User</TableHead>
-              <TableHead className="w-[50px]">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {projects.map((project) => (
-              <TableRow key={project.id}>
-                <TableCell className="font-medium">
-                  <div className="flex flex-col">
-                    <Link
-                      href={`/playground/${project.id}`}
-                      className="hover:underline"
-                    >
-                      <span className="font-semibold">{project.title}</span>
-                    </Link>
-                    <span className="text-sm text-gray-500 line-clamp-1">
-                      {project.description}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant="outline"
-                    className="bg-[#E93F3F15] text-[#E93F3F] border-[#E93F3F]"
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="group relative rounded-xl border border-border/50 bg-white/50 dark:bg-white/5 backdrop-blur-sm hover:border-primary/50 hover:shadow-lg transition-smooth overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
+            
+            <div className="relative p-6 space-y-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <Link
+                    href={`/playground/${project.id}`}
+                    className="group/link"
                   >
-                    {project.template}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm text-gray-500">
-                    {format(new Date(project.createdAt), "MMM dd, yyyy")}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full overflow-hidden">
-                      <Image
-                        src={project.user.image || "/placeholder.svg"}
-                        alt={project.user.name || "User"}
-                        width={32}
-                        height={32}
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="text-sm">{project.user.name || "Anonymous"}</span>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">Open menu</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuItem asChild>
-                        <MarkedToggleButton markedForRevision={project.Starmark[0]?.isMarked} id={project.id} />
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href={`/playground/${project.id}`}
-                          className="flex items-center"
-                        >
-                          <Eye className="h-4 w-4 mr-2" />
-                          Open Project
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link
-                          href={`/playground/${project.id}`}
-                          target="_blank"
-                          className="flex items-center"
-                        >
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Open in New Tab
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => handleEditClick(project)}
+                    <h3 className="text-xl font-bold text-foreground group-hover/link:text-primary transition-colors truncate">
+                      {project.title}
+                    </h3>
+                  </Link>
+                  <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                    {project.description || "No description"}
+                  </p>
+                </div>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-all"
+                    >
+                      <MoreHorizontal className="h-4 w-4" />
+                      <span className="sr-only">Open menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem asChild>
+                      <MarkedToggleButton markedForRevision={project.Starmark[0]?.isMarked} id={project.id} />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={`/playground/${project.id}`}
+                        className="flex items-center"
                       >
-                        <Edit3 className="h-4 w-4 mr-2" />
-                        Edit Project
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => handleDuplicateProject(project)}
+                        <Eye className="h-4 w-4 mr-2" />
+                        Open Project
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={`/playground/${project.id}`}
+                        target="_blank"
+                        className="flex items-center"
                       >
-                        <Copy className="h-4 w-4 mr-2" />
-                        Duplicate
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => copyProjectUrl(project.id)}
-                      >
-                        <Download className="h-4 w-4 mr-2" />
-                        Copy URL
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => handleDeleteClick(project)}
-                        className="text-destructive focus:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4 mr-2" />
-                        Delete Project
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Open in New Tab
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => handleEditClick(project)}
+                    >
+                      <Edit3 className="h-4 w-4 mr-2" />
+                      Edit Project
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleDuplicateProject(project)}
+                    >
+                      <Copy className="h-4 w-4 mr-2" />
+                      Duplicate
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => copyProjectUrl(project.id)}
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Copy URL
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => handleDeleteClick(project)}
+                      className="text-destructive focus:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete Project
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2">
+                <Badge
+                  variant="secondary"
+                  className="bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border-0"
+                >
+                  {project.template}
+                </Badge>
+                <span className="text-xs text-muted-foreground">
+                  {format(new Date(project.createdAt), "MMM dd, yyyy")}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 pt-2 border-t border-border/30">
+                <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-primary/20">
+                  <Image
+                    src={project.user.image || "/placeholder.svg"}
+                    alt={project.user.name || "User"}
+                    width={32}
+                    height={32}
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-sm font-medium text-foreground">
+                  {project.user.name || "Anonymous"}
+                </span>
+              </div>
+
+              <Link
+                href={`/playground/${project.id}`}
+                className="mt-4 w-full inline-block"
+              >
+                <Button 
+                  variant="outline" 
+                  className="w-full group/btn border-primary/30 hover:border-primary/50 hover:bg-primary/5 transition-smooth"
+                >
+                  Open Project
+                  <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-0.5 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Edit Project Dialog */}

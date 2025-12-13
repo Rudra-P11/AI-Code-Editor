@@ -291,14 +291,16 @@ const MainPlaygroundPage = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <AlertCircle className="h-12 w-12 text-red-500 mb-4" />
-        <h2 className="text-xl font-semibold text-red-600 mb-2">
-          Something went wrong
-        </h2>
-        <p className="text-gray-600 mb-4">{error}</p>
-        <Button onClick={() => window.location.reload()} variant="destructive">
-          Try Again
-        </Button>
+        <div className="glass rounded-2xl p-12 text-center max-w-md">
+          <AlertCircle className="h-16 w-16 text-red-500 mb-6 mx-auto" />
+          <h2 className="text-2xl font-bold text-foreground mb-3">
+            Oops! Something went wrong
+          </h2>
+          <p className="text-muted-foreground mb-6 text-sm leading-relaxed">{error}</p>
+          <Button onClick={() => window.location.reload()} className="shadow-glow">
+            Try Again
+          </Button>
+        </div>
       </div>
     );
   }
@@ -307,11 +309,16 @@ const MainPlaygroundPage = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <div className="w-full max-w-md p-6 rounded-lg shadow-sm border">
-          <h2 className="text-xl font-semibold mb-6 text-center">
+        <div className="glass w-full max-w-md p-8 rounded-2xl text-center">
+          <div className="mb-6 flex justify-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white animate-spin">
+              <div className="w-8 h-8 rounded-full border-2 border-white border-t-transparent" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold mb-8 text-foreground">
             Loading Playground
           </h2>
-          <div className="mb-8">
+          <div className="space-y-4">
             <LoadingStep
               currentStep={1}
               step={1}
@@ -333,13 +340,16 @@ const MainPlaygroundPage = () => {
   if (!templateData) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <FolderOpen className="h-12 w-12 text-amber-500 mb-4" />
-        <h2 className="text-xl font-semibold text-amber-600 mb-2">
-          No template data available
-        </h2>
-        <Button onClick={() => window.location.reload()} variant="outline">
-          Reload Template
-        </Button>
+        <div className="glass rounded-2xl p-12 text-center max-w-md">
+          <FolderOpen className="h-16 w-16 text-amber-500 mb-6 mx-auto" />
+          <h2 className="text-2xl font-bold text-foreground mb-3">
+            No Template Available
+          </h2>
+          <p className="text-muted-foreground mb-6 text-sm">Unable to load your template. Please try reloading.</p>
+          <Button onClick={() => window.location.reload()} className="shadow-glow">
+            Reload Template
+          </Button>
+        </div>
       </div>
     );
   }
@@ -360,13 +370,13 @@ const MainPlaygroundPage = () => {
           onRenameFolder={wrappedHandleRenameFolder}
         />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-border/50 bg-gradient-to-r from-white/50 to-blue-50/30 dark:from-white/5 dark:to-blue-500/10 backdrop-blur-sm px-4">
+            <SidebarTrigger className="-ml-1 hover:bg-muted rounded-lg transition-smooth" />
+            <Separator orientation="vertical" className="mr-2 h-4 bg-border/50" />
 
             <div className="flex flex-1 items-center gap-2">
               <div className="flex flex-col flex-1">
-                <h1 className="text-sm font-medium">
+                <h1 className="text-sm font-bold text-foreground">
                   {playgroundData?.title || "Code Playground"}
                 </h1>
                 <p className="text-xs text-muted-foreground">
@@ -375,14 +385,15 @@ const MainPlaygroundPage = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <Tooltip>
-                  <TooltipTrigger>
+                  <TooltipTrigger asChild>
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => handleSave()}
                       disabled={!activeFile || !activeFile.hasUnsavedChanges}
+                      className="hover:bg-blue-50 dark:hover:bg-blue-500/20 hover:border-blue-300 dark:hover:border-blue-500/50 transition-smooth"
                     >
                       <Save className="h-4 w-4" />
                     </Button>
@@ -397,6 +408,7 @@ const MainPlaygroundPage = () => {
                       variant="outline"
                       onClick={handleSaveAll}
                       disabled={!hasUnsavedChanges}
+                      className="hover:bg-blue-50 dark:hover:bg-blue-500/20 hover:border-blue-300 dark:hover:border-blue-500/50 transition-smooth"
                     >
                       <Save className="h-4 w-4" /> All
                     </Button>
@@ -412,7 +424,7 @@ const MainPlaygroundPage = () => {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="sm" variant="outline">
+                    <Button size="sm" variant="outline" className="hover:bg-blue-50 dark:hover:bg-blue-500/20 hover:border-blue-300 dark:hover:border-blue-500/50 transition-smooth">
                       <Settings className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -435,36 +447,36 @@ const MainPlaygroundPage = () => {
           <div className="h-[calc(100vh-4rem)]">
             {openFiles.length > 0 ? (
               <div className="h-full flex flex-col">
-                <div className="border-b bg-muted/30">
+                <div className="border-b border-border/50 bg-gradient-to-r from-white/30 to-transparent dark:from-white/5 dark:to-transparent">
                   <Tabs
                     value={activeFileId || ""}
                     onValueChange={setActiveFileId}
                   >
                     <div className="flex items-center justify-between px-4 py-2">
-                      <TabsList className="h-8 bg-transparent p-0">
+                      <TabsList className="h-8 bg-transparent p-0 gap-1">
                         {openFiles.map((file) => (
                           <TabsTrigger
                             key={file.id}
                             value={file.id}
-                            className="relative h-8 px-3 data-[state=active]:bg-background data-[state=active]:shadow-sm group"
+                            className="relative h-8 px-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:shadow-sm group text-xs font-medium transition-smooth border-0 data-[state=active]:border data-[state=active]:border-border/50"
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="h-3 w-3" />
-                              <span>
+                              <span className="max-w-[120px] truncate">
                                 {file.filename}.{file.fileExtension}
                               </span>
                               {file.hasUnsavedChanges && (
-                                <span className="h-2 w-2 rounded-full bg-orange-500" />
+                                <span className="h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
                               )}
-                              <span
-                                className="ml-2 h-4 w-4 hover:bg-destructive hover:text-destructive-foreground rounded-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                              <button
+                                className="ml-1 h-4 w-4 hover:bg-red-100 dark:hover:bg-red-500/20 hover:text-destructive rounded-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   closeFile(file.id);
                                 }}
                               >
                                 <X className="h-3 w-3" />
-                              </span>
+                              </button>
                             </div>
                           </TabsTrigger>
                         ))}
@@ -475,7 +487,7 @@ const MainPlaygroundPage = () => {
                           size="sm"
                           variant="ghost"
                           onClick={closeAllFiles}
-                          className="h-6 px-2 text-xs"
+                          className="h-6 px-2 text-xs hover:bg-red-50 dark:hover:bg-red-500/20 transition-smooth"
                         >
                           Close All
                         </Button>
@@ -529,11 +541,11 @@ const MainPlaygroundPage = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col h-full items-center justify-center text-muted-foreground gap-4">
-                <FileText className="h-16 w-16 text-gray-300" />
-                <div className="text-center">
-                  <p className="text-lg font-medium">No files open</p>
-                  <p className="text-sm text-gray-500">
+              <div className="flex flex-col h-full items-center justify-center gap-4">
+                <div className="glass rounded-2xl p-12 text-center max-w-md">
+                  <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-6 opacity-50" />
+                  <h3 className="text-xl font-bold text-foreground mb-2">No Files Open</h3>
+                  <p className="text-muted-foreground text-sm">
                     Select a file from the sidebar to start editing
                   </p>
                 </div>

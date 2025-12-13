@@ -41,33 +41,30 @@ const AddNewButton = () => {
     <>
       <div
         onClick={() => setIsModalOpen(true)}
-        className="group px-6 py-6 flex flex-row justify-between items-center border rounded-lg bg-muted cursor-pointer 
-        transition-all duration-300 ease-in-out
-        hover:bg-background hover:border-[#E93F3F] hover:scale-[1.02]
-        shadow-[0_2px_10px_rgba(0,0,0,0.08)]
-        hover:shadow-[0_10px_30px_rgba(233,63,63,0.15)]"
+        className="group relative rounded-xl px-6 py-8 flex flex-row justify-between items-center border border-primary/20 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-500/10 dark:via-primary/5 dark:to-purple-500/10 cursor-pointer overflow-hidden
+        transition-smooth hover:border-primary/50"
       >
-        <div className="flex flex-row justify-center items-start gap-4">
-          <Button
-            variant={"outline"}
-            className="flex justify-center items-center bg-white group-hover:bg-[#fff8f8] group-hover:border-[#E93F3F] group-hover:text-[#E93F3F] transition-colors duration-300"
-            size={"icon"}
-          >
-            <Plus size={30} className="transition-transform duration-300 group-hover:rotate-90" />
-          </Button>
-          <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-[#e93f3f]">Add New</h1>
-            <p className="text-sm text-muted-foreground max-w-[220px]">Create a new playground</p>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:via-transparent group-hover:to-purple-500/10 transition-all duration-500" />
+        
+        <div className="relative flex flex-row justify-center items-start gap-4 z-10">
+          <div className="flex justify-center items-center w-16 h-16 rounded-lg bg-gradient-to-br from-blue-600 to-primary text-white shadow-lg shadow-blue-500/30 group-hover:shadow-xl group-hover:scale-110 transition-smooth">
+            <Plus size={28} className="transition-transform duration-300 group-hover:rotate-90" />
+          </div>
+          <div className="flex flex-col justify-center">
+            <h1 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-primary bg-clip-text text-transparent">
+              Create New
+            </h1>
+            <p className="text-sm text-muted-foreground max-w-[200px]">Start a new coding project instantly</p>
           </div>
         </div>
 
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden z-10 group-hover:scale-110 transition-transform duration-300">
           <Image
             src={"/add-new.svg"}
             alt="Create new playground"
-            width={150}
-            height={150}
-            className="transition-transform duration-300 group-hover:scale-110"
+            width={120}
+            height={120}
+            className="opacity-60 group-hover:opacity-100 transition-opacity"
           />
         </div>
       </div>
