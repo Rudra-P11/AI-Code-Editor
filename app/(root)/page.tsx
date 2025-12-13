@@ -27,6 +27,21 @@ export default function Home() {
           50% { transform: translateY(8px); }
         }
         
+        @keyframes card-hover-glow {
+          0%, 100% { 
+            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.1);
+          }
+          50% {
+            box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.15);
+          }
+        }
+        
+        @keyframes subtle-rotate {
+          0% { transform: rotateX(0deg) rotateY(0deg); }
+          50% { transform: rotateX(2deg) rotateY(2deg); }
+          100% { transform: rotateX(0deg) rotateY(0deg); }
+        }
+        
         .scroll-reveal {
           opacity: 0;
           transform: translateY(40px);
@@ -41,6 +56,21 @@ export default function Home() {
         .float-subtle {
           animation: float-subtle 4s ease-in-out infinite;
         }
+        
+        .framework-card {
+          position: relative;
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform-style: preserve-3d;
+        }
+        
+        .framework-card:hover {
+          transform: translateY(-8px) scale(1.02);
+        }
+        
+        .framework-card:hover .card-border {
+          border-color: rgb(59, 130, 246);
+          box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(59, 130, 246, 0.05);
+        }
       `}
       </style>
 
@@ -53,8 +83,8 @@ export default function Home() {
           {/* LEFT SIDE */}
           <div className="max-w-2xl space-y-8">
             <div className="space-y-6">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-tight tracking-tight">
-                Code,<br />run,<br />collaborate
+              <h1 className="text-9xl sm:text-7xl lg:text-8xl  font-bold text-foreground leading-none tracking-tight">
+                COiDE,<br />run and build<br />with AI
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed max-w-xl">
                 A browser-based IDE for modern development. Write, execute, and share code instantly without setup.
@@ -68,7 +98,7 @@ export default function Home() {
                   <ArrowUpRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Rudra-P11" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" size="lg" className="font-semibold">
                   <Github className="w-4 h-4 mr-2" />
                   GitHub
@@ -92,7 +122,7 @@ export default function Home() {
             `}
             </style>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="float-3d-box w-80 h-96 bg-gradient-to-br from-slate-900 to-slate-800 rounded-lg shadow-2xl border border-slate-700 overflow-hidden">
+              <div className="float-3d-box w-full h-96 bg-gradient-to-br from-gray-950 to-gray-800 rounded-lg shadow-2xl border border-slate-700 overflow-hidden">
                 {/* Terminal window effect */}
                 <div className="bg-slate-950 border-b border-slate-700 px-4 py-3 flex gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -236,10 +266,10 @@ console.log(fibonacci(10));
             ].map((framework, idx) => (
               <div
                 key={idx}
-                className="scroll-reveal group relative"
+                className="scroll-reveal group relative framework-card"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${framework.color} rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div className="relative bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-8 hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 space-y-4">
+                <div className="card-border relative bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-8 transition-all duration-300 space-y-4">
                   <div 
                     className="w-12 h-12 rounded-lg flex items-center justify-center"
                     style={{ backgroundColor: `${framework.bgColor}15` }}

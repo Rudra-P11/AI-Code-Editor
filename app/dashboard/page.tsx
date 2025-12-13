@@ -17,7 +17,7 @@ const Page = async () => {
       <div className="flex flex-col justify-start items-center min-h-screen mx-auto max-w-7xl px-4 py-12">
         <div className="w-full mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-foreground">
-            Your Playgrounds
+            Your Playground
           </h1>
           <p className="text-lg text-muted-foreground">
             Create and manage your coding projects with ease

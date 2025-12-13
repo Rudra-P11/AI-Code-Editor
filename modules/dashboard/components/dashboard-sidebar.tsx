@@ -66,7 +66,7 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
     <Sidebar variant="inset" collapsible="icon" className="border-1 border-r">
       <SidebarHeader>
         <div className="flex items-center gap-2 px-4 py-3 justify-center">
-          <Image src={"/logo.svg"} alt="logo" height={60} width={60} />
+          <Image src={"logo.svg"} alt="logo" height={60} width={60} />
         </div>
        
       </SidebarHeader>

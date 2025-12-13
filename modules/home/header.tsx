@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-// import { ThemeToggle } from "@/components/ui/toggle-theme";
-import UserButton from "../auth/components/user-button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Header() {
@@ -28,34 +26,24 @@ export function Header() {
                     className="flex items-center gap-3 justify-center"
                   >
                     <Image
-                      src={"/logo.svg"}
+                      src={"logo.svg"}
                       alt="Logo"
                       height={40}
                       width={40}
                     />
 
                     <span className="hidden sm:block font-bold text-base text-foreground">
-                      VibeCode
+                      COiDE
                     </span>
                   </Link>
                   <span className="text-slate-300 dark:text-slate-700">|</span>
                   {/* Desktop Navigation Links */}
                   <div className="hidden sm:flex items-center gap-6">
                     <Link
-                      href="/docs/components/background-paths"
+                      href="https://www.example.com"
                       className="text-sm font-medium text-slate-600 hover:text-foreground dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
                     >
                       Docs
-                    </Link>
-                    <Link
-                      href="https://codesnippetui.pro/templates?utm_source=codesnippetui.com&utm_medium=header"
-                      target="_blank"
-                      className="text-sm font-medium text-slate-600 hover:text-foreground dark:text-slate-400 dark:hover:text-slate-100 transition-colors flex items-center gap-2"
-                    >
-                      API
-                      <span className="text-green-600 dark:text-green-400 border border-green-300 dark:border-green-600 rounded px-2 py-0.5 text-xs font-semibold bg-green-50 dark:bg-green-950/30">
-                        New
-                      </span>
                     </Link>
                   </div>
                 </div>
@@ -64,7 +52,6 @@ export function Header() {
                 <div className="hidden sm:flex items-center gap-4">
                   <span className="text-slate-300 dark:text-slate-700">|</span>
                   <ThemeToggle />
-                  <UserButton />
                 </div>
 
                 {/* Mobile Navigation */}
@@ -76,7 +63,6 @@ export function Header() {
                     Docs
                   </Link>
                   <ThemeToggle />
-                  <UserButton />
                 </div>
               </div>
             </div>

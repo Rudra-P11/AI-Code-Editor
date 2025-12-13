@@ -294,7 +294,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                         <div className="flex items-center justify-between p-6">
                             <div className="flex items-center gap-3">
                                 <div className="relative w-10 h-10 border rounded-full flex flex-col justify-center items-center">
-                                    <Image src={"/logo.svg"} alt="Logo" width={28} height={28} />
+                                    <Image src={"/public/logo.svg"} alt="Logo" width={28} height={28} />
                                 </div>
                                 <div>
                                     <h2 className="text-lg font-semibold text-zinc-100">
